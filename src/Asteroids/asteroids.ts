@@ -6,7 +6,7 @@ import Player from "./entities/player";
 
 // Game settings
 const MAX_FPS: number = 60;
-const TIMESTEP: number = 1000 / MAX_FPS;
+const TIMESTEP: number = 1000 / 60;
 
 // Physics
 const FRICTION: number = 0.98;
@@ -65,7 +65,7 @@ export default class Asteroids {
     }
 
     gameLoop = (timestamp: DOMHighResTimeStamp) => {
-        if (timestamp < this.lastFrameTimeMs + TIMESTEP) {
+        if (timestamp < this.lastFrameTimeMs + (1000 / MAX_FPS)) {
             requestAnimationFrame(this.gameLoop);
             return;
         }
