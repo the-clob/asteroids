@@ -1,4 +1,4 @@
-import type { Position, Velocity } from "./types";
+import type { Position, Velocity } from "../types";
 import Entity from "./entity.ts"
 
 

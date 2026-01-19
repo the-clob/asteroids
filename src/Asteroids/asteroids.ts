@@ -1,7 +1,7 @@
 // import type { Velocity, Position } from "./types";
 import Input from "./input";
-import Entity from "./entity";
-import Player from "./player";
+import Entity from "./entities/entity";
+import Player from "./entities/player";
 
 
 // Game settings
