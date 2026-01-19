@@ -1,4 +1,3 @@
-// import type { Velocity, Position } from "./types";
 import Input from "./input";
 import Entity from "./entities/entity";
 import Player from "./entities/player";
@@ -18,7 +17,7 @@ export default class Asteroids {
     ctx: CanvasRenderingContext2D;
 
     // Game loop time variables
-    delta: number = 0;
+    deltaTime: number = 0;
     lastFrameTimeMs: DOMHighResTimeStamp = 0;
 
     input: Input;
@@ -38,8 +37,8 @@ export default class Asteroids {
 
     update() {
         if (this.input.keys.w) {
-            this.player.velocity.x += Math.cos(this.player.rotation) * PLAYER_ACCELERATION * this.delta;
-            this.player.velocity.y += Math.sin(this.player.rotation) * PLAYER_ACCELERATION * this.delta;
+            this.player.velocity.x += Math.cos(this.player.rotation) * PLAYER_ACCELERATION * this.deltaTime;
+            this.player.velocity.y += Math.sin(this.player.rotation) * PLAYER_ACCELERATION * this.deltaTime;
         }
         else {
             this.player.velocity.x *= FRICTION;
@@ -47,11 +46,11 @@ export default class Asteroids {
         }
 
         if (this.input.keys.a) {
-            this.player.rotation -= ROTATION_SPEED * this.delta;
+            this.player.rotation -= ROTATION_SPEED * this.deltaTime;
         }
 
         if (this.input.keys.d) {
-            this.player.rotation += ROTATION_SPEED * this.delta;
+            this.player.rotation += ROTATION_SPEED * this.deltaTime;
         }
 
         this.player.update();
@@ -69,12 +68,12 @@ export default class Asteroids {
             requestAnimationFrame(this.gameLoop);
             return;
         }
-        this.delta += timestamp - this.lastFrameTimeMs;
+        this.deltaTime += timestamp - this.lastFrameTimeMs;
         this.lastFrameTimeMs = timestamp;
 
-        while (this.delta >= TIMESTEP) {
+        while (this.deltaTime >= TIMESTEP) {
             this.update();
-            this.delta -= TIMESTEP;
+            this.deltaTime -= TIMESTEP;
         }
 
         this.draw();
