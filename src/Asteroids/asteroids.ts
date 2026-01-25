@@ -1,16 +1,9 @@
+import { GAME_SETTINGS } from "./contants";
+import { PLAYER_SETTINGS } from "./contants";
+
 import Input from "./input";
 import Entity from "./entities/entity";
 import Player from "./entities/player";
-
-
-// Game settings
-const MAX_FPS: number = 60;
-const TIMESTEP: number = 1000 / 60;
-
-// Physics
-const FRICTION: number = 0.98;
-const PLAYER_ACCELERATION: number = 0.005;
-const ROTATION_SPEED: number = 0.004;
 
 
 export default class Asteroids {
@@ -37,20 +30,20 @@ export default class Asteroids {
 
     update() {
         if (this.input.keys.w) {
-            this.player.velocity.x += Math.cos(this.player.rotation) * PLAYER_ACCELERATION * this.deltaTime;
-            this.player.velocity.y += Math.sin(this.player.rotation) * PLAYER_ACCELERATION * this.deltaTime;
+            this.player.velocity.x += Math.cos(this.player.rotation) * PLAYER_SETTINGS.ACCELERATION * this.deltaTime;
+            this.player.velocity.y += Math.sin(this.player.rotation) * PLAYER_SETTINGS.ACCELERATION * this.deltaTime;
         }
         else {
-            this.player.velocity.x *= FRICTION;
-            this.player.velocity.y *= FRICTION;
+            this.player.velocity.x *= GAME_SETTINGS.FRICTION;
+            this.player.velocity.y *= GAME_SETTINGS.FRICTION;
         }
 
         if (this.input.keys.a) {
-            this.player.rotation -= ROTATION_SPEED * this.deltaTime;
+            this.player.rotation -= PLAYER_SETTINGS.ROTATION_SPEED * this.deltaTime;
         }
 
         if (this.input.keys.d) {
-            this.player.rotation += ROTATION_SPEED * this.deltaTime;
+            this.player.rotation += PLAYER_SETTINGS.ROTATION_SPEED * this.deltaTime;
         }
 
         this.player.update();
@@ -64,16 +57,16 @@ export default class Asteroids {
     }
 
     gameLoop = (timestamp: DOMHighResTimeStamp) => {
-        if (timestamp < this.lastFrameTimeMs + (1000 / MAX_FPS)) {
+        if (timestamp < this.lastFrameTimeMs + (1000 / GAME_SETTINGS.MAX_FPS)) {
             requestAnimationFrame(this.gameLoop);
             return;
         }
         this.deltaTime += timestamp - this.lastFrameTimeMs;
         this.lastFrameTimeMs = timestamp;
 
-        while (this.deltaTime >= TIMESTEP) {
+        while (this.deltaTime >= GAME_SETTINGS.TIMESTEP) {
             this.update();
-            this.deltaTime -= TIMESTEP;
+            this.deltaTime -= GAME_SETTINGS.TIMESTEP;
         }
 
         this.draw();
