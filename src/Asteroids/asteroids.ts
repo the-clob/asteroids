@@ -24,6 +24,7 @@ export default class Asteroids {
             position: { x: this.ctx.canvas.width / 2, y: this.ctx.canvas.height / 2 },
             velocity: { x: 0, y: 0 },
             rotation: 0,
+            shape: PLAYER_SETTINGS.SHAPE.map(point => [...point]),
             color: "white",
         });
     }

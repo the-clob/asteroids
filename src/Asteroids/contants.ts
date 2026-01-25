@@ -10,6 +10,7 @@ export const PLAYER_SETTINGS = {
     ACCELERATION: 0.005,
     ROTATION_SPEED: 0.004,
     MAX_SPEED: 20,
+    SHAPE: [[20, 0], [-15, -15], [-15, 15]],
 } as const;
 
 export const WORLD_SETTINGS = {

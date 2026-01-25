@@ -6,16 +6,50 @@ export default abstract class Entity {
     velocity: Velocity;
     rotation: number;
 
+    shape: [number, number][];
     color: string;
 
-    constructor({ position, velocity, rotation, color }: { position: Position, velocity: Velocity, rotation: number, color: string }) {
+    constructor({ position, velocity, rotation, shape, color }: { position: Position, velocity: Velocity, 
+                rotation: number, shape: [number, number][], color: string }) {
         this.position = position;
         this.velocity = velocity;
-        this.color = color;
         this.rotation = rotation;
+        this.shape = shape;
+        this.color = color;
     }
 
-    abstract draw(ctx: CanvasRenderingContext2D): void;
+    draw(ctx: CanvasRenderingContext2D): void {
+        if (!ctx || this.shape.length === 0 || !this.shape[0]) return; 
+
+        // Save original context before rotating
+        ctx.save();
+
+        // Rotate
+        ctx.translate(this.position.x, this.position.y);
+        ctx.rotate(this.rotation);
+        ctx.translate(-this.position.x, -this.position.y);
+
+        // Draw
+        ctx.beginPath();
+
+        const [startX, startY] = this.shape[0];
+        ctx.moveTo(this.position.x + startX, this.position.y + startY);
+
+        // Connect shape points
+        for (const [x, y] of this.shape.slice(1)) {
+            ctx.lineTo(this.position.x + x, this.position.y + y);
+        }
+
+        ctx.closePath();
+
+        // Color lines
+        ctx.strokeStyle = this.color;
+        ctx.stroke();
+
+        // Restore original context
+        ctx.restore();
+
+    };
+
     abstract update(): void;
-    
 }
