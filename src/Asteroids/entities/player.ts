@@ -1,7 +1,5 @@
 import type { Position, Velocity } from "../types";
-
 import { PLAYER_SETTINGS, GAME_SETTINGS } from "../constants.ts";
-
 import Entity from "./entity.ts"
 
 
