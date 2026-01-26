@@ -1,5 +1,5 @@
-import { GAME_SETTINGS } from "./contants";
-import { PLAYER_SETTINGS } from "./contants";
+import { GAME_SETTINGS } from "./constants";
+import { PLAYER_SETTINGS } from "./constants";
 
 import Input from "./input";
 import Entity from "./entities/entity";
