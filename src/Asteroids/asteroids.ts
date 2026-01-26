@@ -27,18 +27,16 @@ export default class Asteroids {
             shape: PLAYER_SETTINGS.SHAPE.map(point => [...point]),
             color: "white",
         });
+
+        this.entities.push(this.player);
     }
 
     update() {
+        // Handle input
         if (this.input.keys.w) {
             this.player.velocity.x += Math.cos(this.player.rotation) * PLAYER_SETTINGS.ACCELERATION * this.deltaTime;
             this.player.velocity.y += Math.sin(this.player.rotation) * PLAYER_SETTINGS.ACCELERATION * this.deltaTime;
         }
-        else {
-            this.player.velocity.x *= GAME_SETTINGS.FRICTION;
-            this.player.velocity.y *= GAME_SETTINGS.FRICTION;
-        }
-
         if (this.input.keys.a) {
             this.player.rotation -= PLAYER_SETTINGS.ROTATION_SPEED * this.deltaTime;
         }
@@ -47,17 +45,25 @@ export default class Asteroids {
             this.player.rotation += PLAYER_SETTINGS.ROTATION_SPEED * this.deltaTime;
         }
 
-        this.player.update();
+        // Update all entities
+        this.entities.forEach(entity => {
+            entity.update();
+        });
     }
 
     draw() {
+        // Reset screen
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
-        this.player.draw(this.ctx);
+        // Draw all entities
+        this.entities.forEach(entity => {
+            entity.draw(this.ctx);
+        });
     }
 
     gameLoop = (timestamp: DOMHighResTimeStamp) => {
+        // Delta time
         if (timestamp < this.lastFrameTimeMs + (1000 / GAME_SETTINGS.MAX_FPS)) {
             requestAnimationFrame(this.gameLoop);
             return;

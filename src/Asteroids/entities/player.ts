@@ -1,5 +1,7 @@
 import type { Position, Velocity } from "../types";
-import { PLAYER_SETTINGS } from "../contants.ts";
+
+import { PLAYER_SETTINGS, GAME_SETTINGS } from "../contants.ts";
+
 import Entity from "./entity.ts"
 
 
@@ -28,6 +30,9 @@ export default class Player extends Entity {
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
+
+        this.velocity.x *= GAME_SETTINGS.FRICTION;
+        this.velocity.y *= GAME_SETTINGS.FRICTION;
     }
 }
 
