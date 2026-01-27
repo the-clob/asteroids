@@ -1,5 +1,4 @@
-import { GAME_SETTINGS } from "./constants";
-import { PLAYER_SETTINGS } from "./constants";
+import { GAME_SETTINGS, PLAYER_SETTINGS } from "./constants";
 import Input from "./input";
 import Entity from "./entities/entity";
 import Player from "./entities/player";
@@ -46,6 +45,7 @@ export default class Asteroids {
 
         // Update all entities
         this.entities.forEach(entity => {
+            entity.handleBoundaries();
             entity.update();
         });
     }

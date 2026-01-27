@@ -9,8 +9,8 @@ export const GAME_SETTINGS = {
     WORLD_BOUNDARIES: {
         MIN_X: 0,
         MIN_Y: 0,
-        MAX_X: 500,
-        MAX_Y: 500,
+        MAX_X: 800,
+        MAX_Y: 800,
     }
 } as const;
 

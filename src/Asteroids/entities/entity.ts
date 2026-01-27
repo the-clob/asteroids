@@ -1,4 +1,5 @@
 import type { Position, Velocity } from "../types";
+import { GAME_SETTINGS } from "../constants";
 
 
 export default abstract class Entity {
@@ -17,6 +18,22 @@ export default abstract class Entity {
         this.shape = shape;
         this.color = color;
     }
+
+    handleBoundaries(): void {
+        if (this.position.x > GAME_SETTINGS.WORLD_BOUNDARIES.MAX_X) {
+            this.position.x = GAME_SETTINGS.WORLD_BOUNDARIES.MIN_X;
+        }
+        else if (this.position.x < GAME_SETTINGS.WORLD_BOUNDARIES.MIN_X) {
+            this.position.x = GAME_SETTINGS.WORLD_BOUNDARIES.MAX_X;
+        }
+
+        if (this.position.y > GAME_SETTINGS.WORLD_BOUNDARIES.MAX_Y) {
+            this.position.y = GAME_SETTINGS.WORLD_BOUNDARIES.MIN_Y;
+        }
+        else if (this.position.y < GAME_SETTINGS.WORLD_BOUNDARIES.MIN_Y) {
+            this.position.y = GAME_SETTINGS.WORLD_BOUNDARIES.MAX_Y;
+        }
+    };
 
     draw(ctx: CanvasRenderingContext2D): void {
         if (!ctx || this.shape.length === 0 || !this.shape[0]) return; 
