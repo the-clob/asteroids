@@ -67,7 +67,7 @@ The game runs on a fixed timestep loop with delta time accumulation, keeping phy
 
 ## Planned Features
 
-- Title screen
 - Alien saucers
 - High score table
+- Gain a life every 10,000 points
 - Sound effects
