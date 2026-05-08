@@ -3,7 +3,7 @@ export const GAME_SETTINGS = {
     MAX_DELTATIME: 100,
 
     // Physics
-    FRICTION: 0.9995,
+    FRICTION: 0.9994,
     RADIUS_MODIFIER: 0.8,
     
     // Non-visible part of the world on the edges
@@ -23,12 +23,12 @@ export const GAME_SETTINGS = {
 } as const;
 
 export const PLAYER_SETTINGS = {
-    ACCELERATION: 0.00025, 
-    ROTATION_SPEED: 0.0025, 
-    MAX_SPEED: 0.3, 
+    ACCELERATION: 0.0003, 
+    ROTATION_SPEED: 0.004, 
+    MAX_SPEED: 0.4, 
     FIRE_RATE: 500, // Milliseconds 
     INVINCIBLE_DURATION: 5000,
-    INVINCIBLE_FLASH_DURATION: 350,
+    INVINCIBLE_FLASH_DURATION: 250,
     THRUSTER_FLASH_DURATION: 100,
     SHAPE: [
         // Main triangle
@@ -48,9 +48,9 @@ export const PLAYER_SETTINGS = {
 } as const;
 
 export const ASTEROID_SETTINGS = {
-    MAX_SPEED: 30,
-    SPLIT_SPEED: 0.1, 
-    SPAWN_SPEED: 0.05, 
+    MAX_SPEED: 50,
+    SPLIT_SPEED: 0.15, 
+    SPAWN_SPEED: 0.10, 
     SIZE_TO_SCALE: {
         "small": 4,
         "medium": 8, 
@@ -146,5 +146,5 @@ export const ASTEROID_SETTINGS = {
 export const BULLET_SETTINGS = {
     RADIUS: 3, 
     MAX_DISTANCE: 1000, 
-    SPEED: 0.3
+    SPEED: 0.35
 } as const;
