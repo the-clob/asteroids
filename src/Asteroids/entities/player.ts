@@ -18,15 +18,6 @@ export default class Player extends Entity {
         this.rotation = 0;
     }
 
-    public toggleThrusterAnimation(state: boolean) {
-        if (state && this.shape.length === 1) {
-            this.shape.push(PLAYER_SETTINGS.THRUST_PATH.map(point => [...point]));
-        }
-        else if (!state && this.shape.length > 1) {
-            this.shape.pop();
-        }
-    }
-
     public moveForward(deltaTime: number) {
         this.velocity.x += Math.cos(this.rotation) * PLAYER_SETTINGS.ACCELERATION * deltaTime;
         this.velocity.y += Math.sin(this.rotation) * PLAYER_SETTINGS.ACCELERATION * deltaTime;
@@ -93,6 +84,15 @@ export default class Player extends Entity {
             scale: 1, 
             color: "white"
         });
+    }
+
+    private toggleThrusterAnimation(state: boolean) {
+        if (state && this.shape.length === 1) {
+            this.shape.push(PLAYER_SETTINGS.THRUST_PATH.map(point => [...point]));
+        }
+        else if (!state && this.shape.length > 1) {
+            this.shape.pop();
+        }
     }
 }
 

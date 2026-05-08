@@ -367,7 +367,7 @@ export default class Asteroids {
         this.effects = this.effects.filter(e => !e.isExpired);
     }
 
-    public splitAsteroid(asteroid: Asteroid) {
+    private splitAsteroid(asteroid: Asteroid) {
         const newAsteroidSize: AsteroidSizes | null = asteroid.size === "large" ? "medium" 
                                                     : asteroid.size === "medium" ? "small" 
                                                     : null;
