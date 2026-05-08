@@ -212,6 +212,7 @@ export default class Asteroids {
             }
             else {
                 this.state = GameState.GAME_OVER;
+                this.input.destroy();
                 this.onGameOver(this.score);
             }
         }
@@ -329,6 +330,9 @@ export default class Asteroids {
 
     // Arrow function preserves 'this' context for requestAnimationFrame callback
     private gameLoop = (timestamp: DOMHighResTimeStamp) => {
+        // Leaving this commented out, I like how the asteroids still fly on the game over screen
+        // if (this.state === GameState.GAME_OVER) return;
+
         const frameTime = timestamp - this.lastFrameTimeMs;
 
         this.lastFrameDuration = frameTime;

@@ -12,6 +12,11 @@ export default class Input {
         window.addEventListener("keyup", this.handleKeyUp);
     }
 
+    public destroy() {
+        window.removeEventListener("keydown", this.handleKeyDown);
+        window.removeEventListener("keydown", this.handleKeyUp);
+    }
+
     public handleKeyDown = (event: KeyboardEvent) => {
         switch (event.code) {
             case "KeyW":
